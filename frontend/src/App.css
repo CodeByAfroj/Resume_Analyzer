@@ -1,0 +1,77 @@
+.spinner{
+  height: 20px;
+  width: 20px;
+
+  border: 6px dotted rgba(255, 111, 0, 0.904);
+  border-top: 6px dotted #3498db;
+  border-radius: 50%;
+  /* animation: spin 1s cubic-bezier(0.5, 3, 0.5, 3)  infinite ; */
+  animation: spin 1s  ease-in-out infinite  ;
+  /* animation: name duration timing-function delay 20 direction fill-mode; */
+}
+@keyframes spin {
+  0%{transform: (0deg);}
+  100%{transform: rotate(360deg);}
+}
+
+.spinner1{
+  height: 30px;
+  width: 30px;
+
+  border: 4px dashed rgba(255, 111, 0, 0.904);
+  border-top: 4px ;
+  border-radius: 50%;
+  /* animation: spin 1s cubic-bezier(0.5, 3, 0.5, 3)  infinite ; */
+  animation: spin1 2s   linear infinite  ;
+  /* animation: name duration timing-function delay 20 direction fill-mode; */
+}
+@keyframes spin1 {
+  0%{transform: (0deg);}
+  50%{transform: scaleX(10px);}
+  /* 100%{transform: rotate(360deg);} */
+}
+
+
+.spinner2{
+  height: 5px;
+  width: 5px;
+
+  border: 4px groove rgb(132, 55, 55);
+  border-top: 4px dotted ;
+  border-radius: 50%;
+  /* animation: spin 1s cubic-bezier(0.5, 3, 0.5, 3)  infinite ; */
+  animation: spin2 3s  linear infinite  ;
+  /* animation: name duration timing-function delay 20 direction fill-mode; */
+}
+@keyframes spin2 {
+  0%{transform: (0deg);}
+  100%{transform: rotate(360deg);}
+}
+
+
+
+
+.loader {
+  width: 300px;
+  height: 4px;
+  background: #ddd;
+  position: relative;
+  overflow: hidden;
+}
+
+.loader::after {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 100%;
+  background: #3f11d6c5;
+ 
+ 
+  position: absolute;
+  animation: load 2s linear infinite;
+}
+
+@keyframes load {
+  0% { left: -50%; }
+  100% { left: 100%; }
+}
