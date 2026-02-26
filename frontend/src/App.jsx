@@ -1,10 +1,12 @@
-// // App.js
-// import React, { useState } from 'react';
-// import axios from 'axios';
+
+// import React, { useState } from "react";
+// import axios from "axios";
+// import Spinner from "./pages/Spinner";
 
 // function App() {
 //   const [file, setFile] = useState(null);
 //   const [uploadResult, setUploadResult] = useState(null);
+//   const [loading, setLoading] = useState(false);
 
 //   const handleFileChange = (e) => {
 //     setFile(e.target.files[0]);
@@ -12,121 +14,122 @@
 
 //   const handleUpload = async () => {
 //     if (!file) {
-//       alert("Please select a file first!");
+//       alert("Please select a resume first!");
 //       return;
 //     }
 
 //     const formData = new FormData();
-//     formData.append('file', file);
+//     formData.append("file", file);
 
 //     try {
-//       const response = await axios.post('/api/upload', formData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       });
-//       console.log(response.data); 
+//       setLoading(true);
+//       const response = await axios.post("/api/upload", formData);
 //       setUploadResult(response.data);
-      
-//       alert("File uploaded successfully!");
+//       setLoading(false);
 //     } catch (error) {
 //       console.error("Upload failed", error);
+//       setLoading(false);
 //       alert("Upload failed");
 //     }
 //   };
 
 //   return (
-//     <div style={{ padding: "2rem" }}>
-//       <h2>File Upload to Express Backend</h2>
-//       <input type="file" onChange={handleFileChange} />
-//       <br />
-//       <button onClick={handleUpload}>Upload</button>
+//     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-cyan-50 flex flex-col items-center px-4">
+
+//       {/* Navbar */}
+//       <header className="w-full max-w-7xl flex justify-between items-center py-6">
+//         <h1 className="text-2xl md:text-3xl font-bold text-indigo-600">
+//           ResumeAI
+//         </h1>
+//         <span className="text-sm text-slate-600 hidden md:block">
+//           AI Powered Resume Analysis
+//         </span>
+//       </header>
+
+//       {/* Hero Section */}
+//       <section className="text-center max-w-3xl mt-10">
+//         <h2 className="text-3xl md:text-5xl font-bold text-slate-800 leading-tight">
+//           Get Matched With The Right Jobs
+//         </h2>
+//         <p className="mt-4 text-slate-600 text-lg">
+//           Upload your resume and let our AI instantly analyze your profile
+//           to find the most relevant job opportunities.
+//         </p>
+//       </section>
+
+//       {/* Upload Card */}
+//       <div className="mt-12 bg-white shadow-2xl rounded-2xl p-8 w-full max-w-xl border border-slate-100">
+
+//         <div className="flex flex-col gap-5">
+
+//           <input
+//             type="file"
+//             onChange={handleFileChange}
+//             className="border border-slate-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+//           />
+
+//           <button
+//             onClick={handleUpload}
+//             className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition duration-300 shadow-md hover:shadow-lg"
+//           >
+//             Analyze Resume
+//           </button>
+//         </div>
+
+//         {loading && (
+//           <div className="mt-6 flex justify-center">
+//             <Spinner />
+//           </div>
+//         )}
+//       </div>
+
+//       {/* Results Section */}
 //       {uploadResult?.jobMatches && (
-//   <div style={{ marginTop: "1rem" }}>
-//     <h3>Job Matches</h3>
-//     <ul>
-//       {uploadResult.jobMatches.map((job, index) => (
-//         <li key={index}>
-//           <strong>{job.job_title}</strong> at {job.employer_name} — {job.job_city}
-//           <br />
-//           <a href={job.job_apply_link} target="_blank" rel="noopener noreferrer">Apply</a>
-//         </li>
-//       ))}
-//     </ul>
-//   </div>
-// )}
+//         <div className="mt-16 w-full max-w-6xl">
+//           <h3 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-10">
+//             Matched Opportunities
+//           </h3>
 
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-
-
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
-// function App() {
-//   const [file, setFile] = useState(null);
-//   const [uploadResult, setUploadResult] = useState(null);
-
-//   const handleFileChange = (e) => {
-//     setFile(e.target.files[0]);
-//   };
-
-//   const handleUpload = async () => {
-//     if (!file) {
-//       alert("Please select a file first!");
-//       return;
-//     }
-
-//     // File validation
-//     if (file.type !== "application/pdf") {
-//       alert("Please upload a PDF file.");
-//       return;
-//     }
-
-//     const formData = new FormData();
-//     formData.append('file', file);
-
-//     try {
-//       const response = await axios.post('/api/upload', formData); // Removed 'Content-Type' header
-//       console.log(response.data);
-//       setUploadResult(response.data);
-      
-//       alert("File uploaded successfully!");
-//     } catch (error) {
-//       console.error("Upload failed:", error);
-//       if (error.response) {
-//         console.error("Response data:", error.response.data); // Log the backend response for debugging
-//       }
-//       alert("Upload failed: " + (error.response?.data?.message || error.message));
-//     }
-//   };
-
-//   return (
-//     <div style={{ padding: "2rem" }}>
-//       <h2>File Upload to Express Backend</h2>
-//       <input type="file" onChange={handleFileChange} />
-//       <br />
-//       <button onClick={handleUpload}>Upload</button>
-
-//       {uploadResult?.jobMatches && (
-//         <div style={{ marginTop: "1rem" }}>
-//           <h3>Job Matches</h3>
-//           <ul>
+//           <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 //             {uploadResult.jobMatches.map((job, index) => (
-//               <li key={index}>
-//                 <strong>{job.job_title}</strong> at {job.employer_name} — {job.job_city}
-//                 <br />
-//                 <a href={job.job_apply_link} target="_blank" rel="noopener noreferrer">Apply</a>
-//               </li>
+//               <div
+//                 key={index}
+//                 className="bg-white rounded-xl p-6 shadow-lg border border-slate-100 hover:shadow-2xl transition duration-300"
+//               >
+//                 <h4 className="text-lg font-semibold text-slate-800 mb-2">
+//                   {job.job_title}
+//                 </h4>
+
+//                 <p className="text-slate-500 text-sm mb-4">
+//                   {job.employer_name} • {job.job_city} •{" "}
+//                   {job.job_employment_type}
+//                 </p>
+
+//                 <a
+//                   href={job.job_apply_link}
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
+//                 >
+//                   Apply Now
+//                 </a>
+//               </div>
 //             ))}
-//           </ul>
+//           </div>
 //         </div>
 //       )}
+
+//       {!loading && uploadResult?.jobMatches?.length === 0 && (
+//         <div className="mt-8 text-slate-500 text-center">
+//           No job matches found for this resume.
+//         </div>
+//       )}
+
+//       {/* Footer */}
+//       <footer className="mt-20 py-6 text-sm text-slate-500 text-center">
+//         © 2026 ResumeAI. Built with AI.
+//       </footer>
+
 //     </div>
 //   );
 // }
@@ -134,14 +137,15 @@
 // export default App;
 
 
-import React, { useState } from 'react';
-import axios from 'axios';
-import Spinner from './pages/Spinner';
+import React, { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [file, setFile] = useState(null);
   const [uploadResult, setUploadResult] = useState(null);
-  const [loading, setLoading] = useState(false); // Loading state for UI
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -149,81 +153,165 @@ function App() {
 
   const handleUpload = async () => {
     if (!file) {
-      alert("Please select a file first!");
+      alert("Please select a resume first!");
       return;
     }
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     try {
-      setLoading(true); // Start loading when the upload begins
+      setLoading(true);
+      setProgress(0);
+      setUploadResult(null);
 
-      const response = await axios.post('/api/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const steps = [
+        { progress: 15, message: "Uploading resume..." },
+        { progress: 35, message: "Extracting resume content..." },
+        { progress: 55, message: "Analyzing skills with AI..." },
+        { progress: 75, message: "Matching relevant jobs..." },
+        { progress: 95, message: "Finalizing results..." },
+      ];
 
-      console.log(response.data)
-      setUploadResult(response.data); // Set the job matches in state
-      setLoading(false); // Stop loading when the response is received
+      let stepIndex = 0;
 
-      alert("File uploaded and analyzed successfully!");
+      const interval = setInterval(() => {
+        if (stepIndex < steps.length) {
+          setProgress(steps[stepIndex].progress);
+          setStatusMessage(steps[stepIndex].message);
+          stepIndex++;
+        }
+      }, 1200);
+
+      const response = await axios.post("/api/upload", formData);
+
+      clearInterval(interval);
+      setProgress(100);
+      setStatusMessage("Analysis Complete ✅");
+
+      setTimeout(() => {
+        setUploadResult(response.data);
+        setLoading(false);
+      }, 800);
+
     } catch (error) {
       console.error("Upload failed", error);
-      setLoading(false); // Stop loading if there's an error
+      setLoading(false);
       alert("Upload failed");
     }
   };
 
   return (
-      <>
-     
-       <div className='h-screen bg-gradient-to-r from-slate-900 via-gray-600 to-zink-600  bg-transparent '>
-       <div className='h-auto  w-screen flex  flex-col items-center relative '>
-        <h2 className='text-5xl mt-9 p-10 bg-gradient-to-r from-violet-400 to-rose-400 bg-clip-text text-transparent'>Resume Analyzer</h2>
-          <div className='absolute max-sm:hidden  h-45 w-60 top-10 left-30 text-2xl bg-gradient-to-r from-blue-400 to-pink-400 bg-clip-text text-transparent '>Are you tired of searching for jobs on online platforms?</div>
-          <div className='absolute max-sm:hidden h-45 w-60  right-30 top-10 bg-gradient-to-r from-pink-400 to-blue-400 bg-clip-text text-transparent text-2xl  '>Don't Worry! We have a Solution...Just Upload Your Resume and Get a list of Jobs </div>
-        
-        <div className='mt-1 h-auto   '>
-         <div  className='flex gap-2'>
-           <input className=' bg-gradient-to-r from-blue-400  to-emerald-500 bg-clip-text text-transparent outline-2 m-2 rounded-md outline-indigo-400 p-1 hover:outline-2 hover:outline-blue-400 duration-4000' type="file" onChange={handleFileChange} />
-           <button className='h-10 w-25  bg-gradient-to-r from-blue-400  to-emerald-500 bg-clip-text text-transparent   ' onClick={handleUpload}>Upload</button>
-         </div>
-   
-       
-      {loading && <div className='flex' ><Spinner/>
-      
-      </div>} {/* Show loading indicator while processing */}
-      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-cyan-50 flex flex-col items-center px-4">
+
+      {/* Navbar */}
+      <header className="w-full max-w-7xl flex justify-between items-center py-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-indigo-600">
+          ResumeAI
+        </h1>
+        <span className="text-sm text-slate-600 hidden md:block">
+          AI Powered Resume Analysis
+        </span>
+      </header>
+
+      {/* Hero */}
+      <section className="text-center max-w-3xl mt-10">
+        <h2 className="text-3xl md:text-5xl font-bold text-slate-800 leading-tight">
+          Get Matched With The Right Jobs Instantly
+        </h2>
+        <p className="mt-4 text-slate-600 text-lg">
+          Upload your resume and let our AI analyze your skills and match
+          you with the most relevant opportunities.
+        </p>
+      </section>
+
+      {/* Upload Card */}
+      <div className="mt-12 bg-white shadow-2xl rounded-2xl p-8 w-full max-w-xl border border-slate-100">
+
+        <div className="flex flex-col gap-5">
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="border border-slate-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          />
+
+          <button
+            onClick={handleUpload}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition duration-300 shadow-md hover:shadow-lg"
+          >
+            Analyze Resume
+          </button>
+        </div>
+
+        {/* Professional Loader */}
+        {loading && (
+          <div className="mt-8 w-full">
+            <div className="mb-3 text-sm text-indigo-600 font-medium text-center">
+              {statusMessage}
+            </div>
+
+            <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-indigo-500 to-cyan-500 transition-all duration-700"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className="text-xs text-slate-500 text-center mt-2">
+              {progress}% completed
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Results */}
       {uploadResult?.jobMatches && (
-        <div className='border rounded-md max-sm:h-90 h-100 w-105 mt-4 overflow-auto  '>
-          <h3 className='text-xl text-center '>Matched Jobs</h3>
-          <ul className='flex flex-col gap-4 p-3 '>
+        <div className="mt-16 w-full max-w-6xl">
+          <h3 className="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-10">
+            Matched Opportunities
+          </h3>
+
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {uploadResult.jobMatches.map((job, index) => (
-              <li className='border rounded-md  p-2 ' key={index}>
-                <strong>{job.job_title}</strong> at {job.employer_name} — {job.job_city} {job.job_employment_type}
-                <br />
-                <a className=''  href={job.job_apply_link} target="_blank" rel="noopener noreferrer">
-                  Apply
+              <div
+                key={index}
+                className="bg-white rounded-xl p-6 shadow-lg border border-slate-100 hover:shadow-2xl transition duration-300"
+              >
+                <h4 className="text-lg font-semibold text-slate-800 mb-2">
+                  {job.job_title}
+                </h4>
+
+                <p className="text-slate-500 text-sm mb-4">
+                  {job.employer_name} • {job.job_city} •{" "}
+                  {job.job_employment_type}
+                </p>
+
+                <a
+                  href={job.job_apply_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition"
+                >
+                  Apply Now
                 </a>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
-      {/* In case there are no job matches */}
       {!loading && uploadResult?.jobMatches?.length === 0 && (
-        <div>No job matches found for the given resume.</div>
-      )}
-    </div>
+        <div className="mt-8 text-slate-500 text-center">
+          No job matches found for this resume.
         </div>
-      
-       </div>
-      
-      </>
+      )}
+
+      {/* Footer */}
+      <footer className="mt-20 py-6 text-sm text-slate-500 text-center">
+        © 2026 ResumeAI. Built with AI.
+      </footer>
+
+    </div>
   );
 }
 
