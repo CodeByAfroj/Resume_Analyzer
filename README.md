@@ -1,7 +1,24 @@
-# Resume Analyzer
+# 🚀 ResumeAI - Intelligent Resume Analyzer
 
-A full-stack web application that analyzes your resume and finds relevant job opportunities. Upload your resume (PDF or DOCX), and the application uses AI to understand your skills, then searches for matching job openings.
+AI-powered resume analyzer that extracts resume content, generates optimized job search queries using LLM, and fetches relevant job opportunities.
 
+---
+
+## 🖥️ Homepage
+
+<p align="center">
+  <img src="./frontend/src/assets/Home.png" width="800"/>
+</p>
+
+---
+
+## 📊 Matched Jobs
+
+<p align="center">
+  <img src="./frontend/src/assets/Result.png" width="800"/>
+</p>
+
+---
 ## Table of Contents
 
 - [Features](#features)
@@ -91,7 +108,7 @@ touch .env
 
 ```env
 # Server Configuration
-PORT=5000
+PORT=5050
 
 # OpenRouter API Key (for AI-powered resume analysis)
 OPENROUTER_API_KEY=your_openrouter_api_key_here
@@ -99,8 +116,6 @@ OPENROUTER_API_KEY=your_openrouter_api_key_here
 # RapidAPI Key (for job search functionality)
 RAPIDAPI_KEY=your_rapidapi_key_here
 
-# MongoDB Connection String (optional, if using database features)
-MONGODB_URI=mongodb://localhost:27017/resume-analyzer
 ```
 
 ### How to Get API Keys
